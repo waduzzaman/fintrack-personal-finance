@@ -1,5 +1,8 @@
 "use client"
 
+import { useEffect } from "react"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { ArrowDownRight, ArrowUpRight, CreditCard, DollarSign, Wallet } from "lucide-react"
@@ -29,6 +32,23 @@ const recentTransactions = [
 ]
 
 export default function DashboardPage() {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+
+  useEffect(() => {
+    if (!session && status !== "loading") {
+      router.push("/login")
+    }
+  }, [session, status, router])
+
+  if (status === "loading" || !session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
