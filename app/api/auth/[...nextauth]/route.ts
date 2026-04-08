@@ -9,6 +9,9 @@ const getNextAuthUrl = () => {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`
   }
+  if (process.env.NEXTAUTH_URL_PROD && process.env.NODE_ENV === "production") {
+    return process.env.NEXTAUTH_URL_PROD
+  }
   return process.env.NEXTAUTH_URL || "http://localhost:3000"
 }
 

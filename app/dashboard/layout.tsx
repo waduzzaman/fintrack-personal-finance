@@ -19,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -70,10 +70,10 @@ export default function DashboardLayout({
       <header className="sticky top-0 z-40 flex h-16 w-full items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4 lg:px-6">
         <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="shrink-0 lg:hidden">
+            <span className="inline-flex items-center justify-center rounded-lg border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground cursor-pointer lg:hidden" style={{ width: '2.25rem', height: '2.25rem' }}>
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle navigation menu</span>
-            </Button>
+            </span>
           </SheetTrigger>
           <SheetContent side="left" className="w-72 sm:w-80">
             <div className="flex items-center gap-2 font-semibold mb-6">
@@ -99,7 +99,7 @@ export default function DashboardLayout({
         <div className="flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
+              <span className="inline-flex items-center justify-center rounded-full cursor-pointer" style={{ width: '2.25rem', height: '2.25rem' }}>
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={session?.user?.image || ""} alt={session?.user?.name || "User"} />
                   <AvatarFallback className="bg-primary/10 text-primary">
@@ -107,15 +107,17 @@ export default function DashboardLayout({
                   </AvatarFallback>
                 </Avatar>
                 <span className="sr-only">Toggle user menu</span>
-              </Button>
+              </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{session?.user?.name || "User"}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{session?.user?.email}</p>
-                </div>
-              </DropdownMenuLabel>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">{session?.user?.name || "User"}</p>
+                    <p className="text-xs leading-none text-muted-foreground">{session?.user?.email}</p>
+                  </div>
+                </DropdownMenuLabel>
+              </DropdownMenuGroup>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <Settings className="mr-2 h-4 w-4" />
