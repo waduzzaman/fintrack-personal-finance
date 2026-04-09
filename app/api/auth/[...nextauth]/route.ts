@@ -9,10 +9,7 @@ const getNextAuthUrl = () => {
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`
   }
-  if (process.env.NEXTAUTH_URL_PROD && process.env.NODE_ENV === "production") {
-    return process.env.NEXTAUTH_URL_PROD
-  }
-  return process.env.NEXTAUTH_URL || "http://localhost:3000"
+  return process.env.APP_URL
 }
 
 const authOptions: NextAuthOptions = {
@@ -95,7 +92,7 @@ const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/login",
   },
-  debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
 }
 
 const handler = NextAuth(authOptions)
