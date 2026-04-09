@@ -59,6 +59,7 @@ const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name,
+          role: user.role,
         }
       }
     })
@@ -75,6 +76,7 @@ const authOptions: NextAuthOptions = {
       console.log("jwt callback:", { user, account })
       if (user) {
         token.id = user.id
+        token.role = (user as any).role
       }
       if (account) {
         token.accessToken = account.access_token
@@ -85,6 +87,7 @@ const authOptions: NextAuthOptions = {
       console.log("session callback:", { token, user })
       if (session.user) {
         (session.user as any).id = token.id
+        ;(session.user as any).role = token.role
       }
       return session
     }

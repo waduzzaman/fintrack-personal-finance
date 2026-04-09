@@ -14,6 +14,7 @@ model User {
   password      String?
   emailVerified DateTime?
   image         String?
+  role          String    @default("USER")
   accounts      Account[]
   sessions      Session[]
   transactions  Transaction[]
@@ -21,6 +22,8 @@ model User {
   goals         Goal[]
   categories    Category[]
   bankAccounts  BankAccount[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
 }
 
 model Account {
