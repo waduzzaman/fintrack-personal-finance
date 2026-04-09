@@ -12,7 +12,7 @@ const getNextAuthUrl = () => {
   return process.env.APP_URL
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
