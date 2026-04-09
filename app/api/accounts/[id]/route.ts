@@ -16,7 +16,7 @@ export async function GET(
 
     const account = await prisma.bankAccount.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: session.user.id,
       },
     })
@@ -97,7 +97,7 @@ export async function DELETE(
 
     const account = await prisma.bankAccount.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: session.user.id,
       },
     })

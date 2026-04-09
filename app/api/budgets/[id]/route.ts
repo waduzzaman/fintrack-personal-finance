@@ -16,11 +16,8 @@ export async function GET(
 
     const budget = await prisma.budget.findFirst({
       where: {
-        id: params.id,
+        id: id,
         userId: session.user.id,
-      },
-      include: {
-        category: true,
       },
     })
 
