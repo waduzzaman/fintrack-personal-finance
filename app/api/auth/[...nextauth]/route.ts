@@ -23,7 +23,7 @@ const authOptions: NextAuthOptions = {
           prompt: "consent",
           access_type: "offline",
           response_type: "code",
-          redirect_uri: `${getNextAuthUrl()}/api/auth/callback/google`,
+          redirect_uri: `${process.env.APP_URL}/api/auth/callback/google`,
         },
       },
     }),
